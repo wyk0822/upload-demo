@@ -37,7 +37,7 @@ Uploading a large file by fragmentation, powered by Flask and WebUploader. Downl
 
 ## 技术
 
-* Python语言，Flask框架  
+* Python2语言，Flask框架  
 
 * WebUploader分片与上传，Bootstrap渲染上传进度条  
 
