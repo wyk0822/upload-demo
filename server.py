@@ -18,9 +18,8 @@ def upload_part():  # 接收前端上传的一个分片
     task = request.form.get('task_id')  # 获取文件的唯一标识符
     chunk = request.form.get('chunk', 0)  # 获取该分片在所有分片中的序号
     filename = '%s%s' % (task, chunk)  # 构造该分片的唯一标识符
-
     upload_file = request.files['file']
-    upload_file.save('./upload/%s' % filename)  # 保存分片到本地
+    upload_file.save('./upload/{}'.format(filename))  # 保存分片到本地
     return rt('./index.html')
 
 
@@ -36,7 +35,7 @@ def upload_success():  # 按序读出分片内容，并写入新文件
                 source_file = open(filename, 'rb')  # 按序打开每个分片
                 target_file.write(source_file.read())  # 读取分片内容写入新文件
                 source_file.close()
-            except IOError, msg:
+            except IOError as msg:
                 break
 
             chunk += 1
@@ -67,4 +66,4 @@ def file_download(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, threaded=True)
+    app.run(host="0.0.0.0", debug=True, threaded=True)
